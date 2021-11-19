@@ -1,19 +1,33 @@
 <div class="login-page-container">
-<img src="assets/logo_transparent 1.png" alt="" class="logo">
+  <img src="assets/logo_transparent 1.png" alt="" class="logo">
 
-<div class="container">
-  <a href="/signup" class="btn-flotante">{{redirectionButtomText}}</a>
-  <form class="login-form">
-    <p class="title">{{formTitle}}</p>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Your Email</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <button type="submit" class="btn btn-primary btn-login">{{formTitle}}</button>
-  </form>
-</div>
+  <div class="container">
+    <a href="/signup" class="btn-flotante">{{redirectionButtomText}}</a>
+    <form class="login-form" [formGroup]="userForm">
+      <p class="title">{{formTitle}}</p>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Your Email</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+          formControlName="email">
+        <div class="alert-danger" *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
+          <div class="container-error-message" *ngIf="userForm.get('email').errors.required">
+            Your email is required
+          </div>
+          <div class="container-error-message" *ngIf="userForm.get('email').errors.email">
+            enter a valid email
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+        <div class="alert-danger" *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
+          <div class="container-error-message" *ngIf="userForm.get('password').errors.required">
+            Your password is required
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-login" (click)="goto()">{{formTitle}}</button>
+    </form>
+  </div>
 </div>

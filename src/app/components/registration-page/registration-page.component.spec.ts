@@ -1,8 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RegistrationPageComponent } from './registration-page.component';
-import { ReactiveFormsModule } from '@angular/forms'
-import { LoginPageComponent } from '../login-page/login-page.component';
 
 describe('RegistrationPageComponent', () => {
   let component: RegistrationPageComponent;
@@ -26,14 +25,14 @@ describe('RegistrationPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('debe invocar a la funcion router.navigate', () => {
-    const spyRouter = spyOn(component.router, 'navigate');
+  // it('debe invocar a la funcion router.navigate', () => {
+  //   const spyRouter = spyOn(component.router, 'navigate');
 
-    component.goto();
+  //   component.goto();
 
-    expect(spyRouter).toHaveBeenCalled()
-    expect(spyRouter).toHaveBeenCalledWith([component.redirectionButtomText])
-  });
+  //   expect(spyRouter).toHaveBeenCalled()
+  //   expect(spyRouter).toHaveBeenCalledWith([component.redirectionButtomText])
+  // });
 
   // it('debe invocar el metodo crear formulario', () => {
   //   const createFormSpy = spyOn(component, 'createForm');

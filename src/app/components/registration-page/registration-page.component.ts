@@ -34,6 +34,7 @@ export class RegistrationPageComponent implements OnInit {
   goto(): void {
     if (this.userForm.valid) {
       console.log(this.userForm.value);
+      this.router.navigate(['profile']);
     } else {
       alert('Invalid form')
     }
