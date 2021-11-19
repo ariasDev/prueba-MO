@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { LoginPageComponent } from './login-page.component';
 
 describe('LoginPageComponent', () => {
@@ -8,9 +8,10 @@ describe('LoginPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginPageComponent ]
+      imports: [RouterTestingModule],
+      declarations: [LoginPageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +22,14 @@ describe('LoginPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should invoke router.navigate', () => {
+    const spyRouter = spyOn(component.router, 'navigate');
+
+    component.goto();
+
+    expect(spyRouter).toHaveBeenCalled()
+    expect(spyRouter).toHaveBeenCalledWith([component.redirectionButtomText])
   });
 });

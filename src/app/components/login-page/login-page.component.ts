@@ -11,7 +11,7 @@ export class LoginPageComponent implements OnInit {
   formTitle: String = "Login";
   redirectionButtomText: String = "signup";
 
-  constructor(private readonly router: Router) { }
+  constructor(public readonly router: Router) { }
 
   ngOnInit(): void {
   }
