@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoginModel } from 'src/app/models/LoginModel';
+import { LoginResponseModel } from 'src/app/models/LoginResponseModel';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +18,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     public readonly router: Router,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly authServiceService: AuthServiceService
   ) {
     this.createForm();
   }
@@ -32,8 +36,17 @@ export class LoginPageComponent implements OnInit {
 
   goto(): void {
     if (this.userForm.valid) {
-      console.log(this.userForm.value);
-      this.router.navigate(['profile']);
+      const loginModel: LoginModel = {
+        email: this.userForm.get('email').value,
+        password: this.userForm.get('password').value,
+      };
+      this.authServiceService.login(loginModel).subscribe((response: LoginResponseModel) => {
+        if (response !== null && response.token !== null) {
+          this.router.navigate(['profile']);
+        } else {
+          alert('Internal server error');
+        }
+      })
     } else {
       alert('Invalid form');
     }
