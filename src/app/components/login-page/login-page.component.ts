@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LoginModel } from 'src/app/models/LoginModel';
 import { LoginResponseModel } from 'src/app/models/LoginResponseModel';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
@@ -10,11 +11,12 @@ import { AuthServiceService } from 'src/app/services/auth-service.service';
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
 
   formTitle: String = "Login";
   redirectionButtomText: String = "signup";
   userForm: FormGroup;
+  loginSubscription: Subscription;
 
   constructor(
     public readonly router: Router,
@@ -40,16 +42,20 @@ export class LoginPageComponent implements OnInit {
         email: this.userForm.get('email').value,
         password: this.userForm.get('password').value,
       };
-      this.authServiceService.login(loginModel).subscribe((response: LoginResponseModel) => {
+      this.loginSubscription = this.authServiceService.login(loginModel).subscribe((response: LoginResponseModel) => {
         if (response !== null && response.token !== null) {
           this.router.navigate(['profile']);
         } else {
           alert('Internal server error');
         }
-      })
+      });
     } else {
       alert('Invalid form');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.loginSubscription.unsubscribe();
   }
 
 }

@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
-import { AuthServiceService } from 'src/app/services/auth-service.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { RegistrationModel } from 'src/app/models/RegistrationModel';
 import { RegistrationResponseModel } from 'src/app/models/RegristrationResponseModel';
+import { AuthServiceService } from 'src/app/services/auth-service.service';
 
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.css']
 })
-export class RegistrationPageComponent implements OnInit {
+export class RegistrationPageComponent implements OnInit, OnDestroy {
 
   formTitle: String = "SIGNUP";
   redirectionButtomText: String = "login";
   userForm: FormGroup;
+  registrationSubscription: Subscription;
 
   constructor(
     public readonly router: Router,
@@ -37,22 +39,25 @@ export class RegistrationPageComponent implements OnInit {
 
   goto(): void {
     if (this.userForm.valid) {
-      console.log(this.userForm.value);
       const registrationModel: RegistrationModel = {
         email: this.userForm.get('email').value,
         name: this.userForm.get('fullName').value,
         password: this.userForm.get('password').value,
       }
-      this.authServiceService.register(registrationModel).subscribe((response: RegistrationResponseModel) => {
+      this.registrationSubscription = this.authServiceService.register(registrationModel).subscribe((response: RegistrationResponseModel) => {
         if (response !== null && response.id !== null) {
           this.router.navigate(['profile']);
         } else {
           alert('Internal server error');
         }
-      })
+      });
     } else {
       alert('Invalid form');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.registrationSubscription.unsubscribe();
   }
 
 }
