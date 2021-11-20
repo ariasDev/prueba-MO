@@ -8,6 +8,7 @@ import { RegistrationPageComponent } from './components/registration-page/regist
 import { ProfilePageComponent } from './components/profile-page/profile-page.component';
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
+import { UserInfoCardComponent } from './components/user-info-card/user-info-card.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginPageComponent,
     RegistrationPageComponent,
     ProfilePageComponent,
+    UserInfoCardComponent,
   ],
   imports: [
     BrowserModule,

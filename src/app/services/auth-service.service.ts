@@ -19,5 +19,9 @@ export class AuthServiceService {
   register(registrationModel: RegistrationModel) {
     return this.http.post(`${this.BASE_URL}/register`, registrationModel)
   }
-  
+
+  getUserInfo() {
+    return this.http.get(`${this.BASE_URL}/user/1`)
+  }
+
 }
