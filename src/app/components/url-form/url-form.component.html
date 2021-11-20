@@ -1,0 +1,15 @@
+<div class="url-form-container">
+  <form [formGroup]="newUrlForm">
+    <div class="form-group">
+      <label for="url" class="black-title">Url to save</label>
+      <input type="text" class="form-control" id="url" placeholder="Enter a new url"
+        formControlName="url">
+    </div>
+    <div class="form-group">
+      <label for="name" class="black-title">Name of url</label>
+      <input type="text" class="form-control" id="name" placeholder="Enter a alias"
+        formControlName="name">
+    </div>
+    <button class="btn btn-primary" (click)="saveUrl()">ADD</button>
+  </form>
+</div>

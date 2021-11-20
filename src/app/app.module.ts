@@ -9,6 +9,7 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http';
 import { UserInfoCardComponent } from './components/user-info-card/user-info-card.component';
+import { UrlFormComponent } from './components/url-form/url-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { UserInfoCardComponent } from './components/user-info-card/user-info-car
     RegistrationPageComponent,
     ProfilePageComponent,
     UserInfoCardComponent,
+    UrlFormComponent,
   ],
   imports: [
     BrowserModule,

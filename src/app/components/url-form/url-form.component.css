@@ -1,0 +1,33 @@
+.url-form-container{
+  box-shadow: 0px 0px 30px rgba(199, 199, 199, 0.55);
+  border-radius: 6px;
+  position: absolute;
+  top: 200px;
+  right: 100px;
+  width: 55%;
+  height: 300px;
+  padding: 20px 70px 20px 70px;
+
+}
+
+input{
+  height: 50px;
+}
+
+
+.black-title{
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+}
+
+button{
+  position: absolute;
+  right: 80px;
+  bottom: 20px;
+  background: #007AFF;
+  border-radius: 4px;
+  width: 222PX;
+}
