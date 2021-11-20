@@ -11,7 +11,7 @@ export class BrowserStorageService {
     localStorage.setItem(key, value);
   }
 
-  getItem(key: string) {
+  getItem(key: string): string {
     return localStorage.getItem(key);
   }
 

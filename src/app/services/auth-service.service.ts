@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { LoginModel } from '../models/LoginModel';
 import { RegistrationModel } from '../models/RegistrationModel';
 
@@ -12,15 +13,15 @@ export class AuthServiceService {
 
   constructor(private http: HttpClient) { }
 
-  login(loginModel: LoginModel) {
+  login(loginModel: LoginModel): Observable<object> {
     return this.http.post(`${this.BASE_URL}/login`, loginModel)
   }
 
-  register(registrationModel: RegistrationModel) {
+  register(registrationModel: RegistrationModel): Observable<object> {
     return this.http.post(`${this.BASE_URL}/register`, registrationModel)
   }
 
-  getUserInfo() {
+  getUserInfo(): Observable<object> {
     return this.http.get(`${this.BASE_URL}/user/1`)
   }
 
