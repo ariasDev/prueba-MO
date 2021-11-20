@@ -8,7 +8,7 @@ import { RegistrationModel } from '../models/RegistrationModel';
 })
 export class AuthServiceService {
 
-  private BASE_URL = "https://private-anon-a4ebb85096-henrybravo.apiary-mock.com";
+  private BASE_URL = "https://6053e8e145e4b3001729271d.mockapi.io/api/";
 
   constructor(private http: HttpClient) { }
 
@@ -19,4 +19,5 @@ export class AuthServiceService {
   register(registrationModel: RegistrationModel) {
     return this.http.post(`${this.BASE_URL}/register`, registrationModel)
   }
+  
 }
