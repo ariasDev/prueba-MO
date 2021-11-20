@@ -37,23 +37,27 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
     })
   }
 
-  goto(): void {
+  register(): void {
     if (this.userForm.valid) {
       const registrationModel: RegistrationModel = {
         email: this.userForm.get('email').value,
         name: this.userForm.get('fullName').value,
         password: this.userForm.get('password').value,
       }
-      this.registrationSubscription = this.authServiceService.register(registrationModel).subscribe((response: RegistrationResponseModel) => {
-        if (response !== null && response.id !== null) {
-          this.router.navigate(['profile']);
-        } else {
-          alert('Internal server error');
-        }
-      });
+      this.callAuthService(registrationModel);
     } else {
       alert('Invalid form');
     }
+  }
+
+  callAuthService(registrationModel: RegistrationModel): void {
+    this.registrationSubscription = this.authServiceService.register(registrationModel).subscribe((response: RegistrationResponseModel) => {
+      if (response !== null && response.id !== null) {
+        this.router.navigate(['login']);
+      } else {
+        alert('Internal server error');
+      }
+    });
   }
 
   ngOnDestroy(): void {
