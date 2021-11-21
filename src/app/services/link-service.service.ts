@@ -19,4 +19,8 @@ export class LinkServiceService {
   getUrlList(): Observable<object> {
     return this.http.get(`${this.BASE_URL}/links`);
   }
+
+  deleteUrl(id: string) {
+    return this.http.delete(`${this.BASE_URL}/links/${id}`);
+  }
 }

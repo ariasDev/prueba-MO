@@ -2,6 +2,6 @@
   <div *ngFor="let item of urlList" class="url-card">
     <p href="" class="url">{{item.url}}</p>
     <p class="black-title">{{item.name}}</p>
-    <img src="../../../assets/trash 1.png" alt="">
+    <img src="../../../assets/trash 1.png" (click)="delete(item.id)">
   </div>
 </div>
