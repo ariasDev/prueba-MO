@@ -1,0 +1,38 @@
+.url-list-container{
+  position: absolute;
+  width: 55%;
+  right: 100px;
+  top: 550px;
+}
+
+.url-card{
+  position: relative;
+  box-shadow: 0px 0px 30px rgba(199, 199, 199, 0.55);
+  border-radius: 6px;
+  margin-bottom: 50px;
+  padding: 24px 60px 24px 24px;
+}
+
+img {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.url{
+  color: #008DF3;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 20px;
+  text-decoration: none;
+  word-break: break-all;
+  white-space: initial;
+  line-height : 40px;
+}
+
+.black-title{
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+}

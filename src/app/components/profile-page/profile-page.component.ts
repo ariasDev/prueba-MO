@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { NewUrlResponseModel } from 'src/app/models/NewUrlResponseModel';
 import { UserInfoModel } from 'src/app/models/UserInfoModel';
 import { AuthServiceService } from 'src/app/services/auth-service.service';
 import { BrowserStorageService } from 'src/app/services/browser-storage.service';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { LinkServiceService } from 'src/app/services/link-service.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,14 +15,18 @@ import { Subscription } from 'rxjs';
 export class ProfilePageComponent implements OnInit, OnDestroy {
 
   userInfo: UserInfoModel;
+  urlList: NewUrlResponseModel[];
   getUserInfoSubscription: Subscription;
+  getUrlListSubscription: Subscription;
 
   constructor(
     private readonly authServiceService: AuthServiceService,
     private readonly browserStorageService: BrowserStorageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly linkServiceService: LinkServiceService
   ) {
     this.getUserInfo();
+    this.getUrlList();
   }
 
   ngOnInit(): void {
@@ -41,8 +47,15 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
     })
   }
 
+  getUrlList(): void {
+    this.getUrlListSubscription = this.linkServiceService.getUrlList().subscribe((response: NewUrlResponseModel[]) => {
+      this.urlList = response;
+    });
+  }
+
   ngOnDestroy(): void {
     this.getUserInfoSubscription.unsubscribe;
+    this.getUrlListSubscription.unsubscribe;
   }
 
 }

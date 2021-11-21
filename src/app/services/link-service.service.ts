@@ -8,11 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class LinkServiceService {
 
-  private BASE_URL = "https://6053e8e145e4b3001729271d.mockapi.io/api/";
+  private BASE_URL = "https://6053e8e145e4b3001729271d.mockapi.io/api";
 
   constructor(private readonly http: HttpClient) { }
 
   saveNewUrl(newUrl: NewUrlModel): Observable<object> {
     return this.http.post(`${this.BASE_URL}/links`, newUrl);
+  }
+
+  getUrlList(): Observable<object> {
+    return this.http.get(`${this.BASE_URL}/links`);
   }
 }
